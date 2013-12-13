@@ -19,5 +19,10 @@ class magento::dependencies ($addepel = false) {
   }
 
   include nginx
-  include phpfpm
+  class { 'phpfpm':
+    user => 'nginx',
+  }
+
+  # Notify phpfpm after any package installation
+  Ensure_packages<| |> ~> Class['phpfpm']
 }
