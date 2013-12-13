@@ -1,0 +1,20 @@
+# magento
+
+A Puppet module to install and configure Magento and its dependencies.
+
+Not ready for production yet.
+
+License
+-------
+
+Apache License v2.0
+
+Contact
+-------
+
+Sam Bashton <sam@bashton.com>
+
+Support
+-------
+
+Please log tickets and issues at [Github](https://github.com/bashtoni/puppet-magento)
