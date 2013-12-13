@@ -26,5 +26,5 @@ class magento::dependencies ($addepel = false) {
 
   # Notify phpfpm after any package installation
   ensure_packages[$packages]
-  Packages[$packages] ~> Class['phpfpm']
+  Package[$packages] ~> Class['phpfpm']
 }
