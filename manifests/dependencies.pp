@@ -6,16 +6,17 @@ class magento::dependencies ($addepel = false) {
       if ($addepel) {
         include epel
       }
-      ensure_packages([
+      $packages = [
         'php-mysql',
         'php-pdo',
         'php-gd',
         'php-mcrypt',
         'php-xml'
-      ])}
-      default: {
-        fail('Sorry, only EL6 is currently supported')
-      }
+      ]
+    }
+    default: {
+      fail('Sorry, only EL6 is currently supported')
+    }
   }
 
   include nginx
@@ -24,5 +25,6 @@ class magento::dependencies ($addepel = false) {
   }
 
   # Notify phpfpm after any package installation
-  Ensure_packages<| |> ~> Class['phpfpm']
+  ensure_packages[$packages]
+  Packages[$packages] ~> Class['phpfpm']
 }
