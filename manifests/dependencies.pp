@@ -3,7 +3,9 @@ class magento::dependencies ($addepel = false) {
 
   case $::osfamily{
     'RedHat': {
-      include epel
+      if ($addepel) {
+        include epel
+      }
       ensure_packages([
         'php-mysql',
         'php-pdo',
