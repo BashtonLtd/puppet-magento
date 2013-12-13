@@ -1,6 +1,8 @@
+# Creates an nginx vhost for a Magento site
+
 define magento::site (
   $webroot,
-  $server_name = $name
+  $server_name = [$name]
 ) {
 
   nginx::resource::vhost { $name:
