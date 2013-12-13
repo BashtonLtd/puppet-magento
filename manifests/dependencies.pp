@@ -4,13 +4,13 @@ class magento::dependencies ($addepel = false) {
   case $::osfamily{
     'RedHat': {
       include epel
-      ensure_packages(
+      ensure_packages([
         'php-mysql',
         'php-pdo',
         'php-gd',
         'php-mcrypt',
         'php-xml'
-      )}
+      ])}
       default: {
         fail('Sorry, only EL6 is currently supported')
       }
