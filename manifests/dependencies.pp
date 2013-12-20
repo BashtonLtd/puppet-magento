@@ -19,7 +19,9 @@ class magento::dependencies ($addepel = false) {
     }
   }
 
-  include nginx
+  class { 'nginx':
+    server_tokens => 'off',
+  }
   class { 'phpfpm':
     user => 'nginx',
   }
