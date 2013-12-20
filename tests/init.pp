@@ -10,3 +10,7 @@
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 include magento
+
+magento::site { 'test':
+  webroot => '/var/www/test',
+}

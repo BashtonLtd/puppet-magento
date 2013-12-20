@@ -20,4 +20,30 @@ define magento::site (
     try_files => '$uri =404';
   }
 
+  $denied = [
+    '^~ /app/',
+    '^~ /includes/',
+    '^~ /lib/',
+    '^~ /media/downloadable/',
+    '^~ /pkginfo/',
+    '^~ /report/config.xml',
+    '^~ /var/'
+  ]
+
+  nginx::resource::location { $denied:
+    www_root      => $webroot,
+    vhost         => $name,
+    location_deny => [ 'all' ],
+  }
+
+  # Don't serve htaccess etc to users
+  nginx::resource::location { 'dotfiles':
+    www_root            => $webroot,
+    vhost               => $name,
+    location            => '/.',
+    location_cfg_append => {
+      return => '404',
+    }
+  }
+
 }
