@@ -9,4 +9,4 @@ project_page 'UNKNOWN'
 
 ## Add dependencies, if any:
 dependency 'puppetlabs/stdlib', '>= 4.1.0'
-dependency 'jfryman/nginx',  '>= 0.0.6',
+dependency 'jfryman/nginx',  '>= 0.0.6'
