@@ -11,6 +11,7 @@ class magento::dependencies ($addepel = false) {
         'php-pdo',
         'php-gd',
         'php-mcrypt',
+        'php-soap',
         'php-xml'
       ]
     }
