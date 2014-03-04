@@ -2,7 +2,7 @@
 
 A Puppet module to install and configure Magento and its dependencies.
 
-Not ready for production yet.
+We're using it in production, but that doesn't necessarily mean you should ;)
 
 License
 -------

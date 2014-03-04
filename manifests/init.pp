@@ -23,10 +23,9 @@
 #
 # Copyright 2013 Bashton Ltd
 #
-class magento ($addepel = false) {
+class magento ($addepel = false, $php54 = false) {
 
   class { 'magento::dependencies':
-    addepel => $addepel,
   }
 
 }
