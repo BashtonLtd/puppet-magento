@@ -6,10 +6,13 @@ define magento::site (
 ) {
 
   nginx::resource::vhost { $name:
-    www_root    => $webroot,
-    try_files   => '$uri $uri/ /index.php?$args',
-    index_files => ['index.html', 'index.php',],
-    server_name => $server_name,
+    www_root          => $webroot,
+    try_files         => '$uri $uri/ /index.php?$args',
+    index_files       => ['index.html', 'index.php',],
+    server_name       => $server_name,
+    vhost_cfg_prepend => {
+      'if'              => '($http_x_forwarded_proto = "https") { set $https on; }'
+    }
   }
 
   nginx::resource::location { "${name}-php":
