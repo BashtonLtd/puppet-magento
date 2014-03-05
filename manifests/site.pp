@@ -20,7 +20,7 @@ define magento::site (
     www_root            => $webroot,
     location            => '~ \.php$',
     fastcgi             => '127.0.0.1:9000',
-    try_files           => '$uri =404',
+    try_files           => ['$uri', '=404',],
     location_cfg_append => {
       fastcgi_param     => 'HTTPS    $elb_https'
     }
