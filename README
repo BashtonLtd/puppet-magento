@@ -4,6 +4,9 @@ A Puppet module to install and configure Magento and its dependencies.
 
 We're using it in production, but that doesn't necessarily mean you should ;)
 
+Currently you need to use my fork of James Fryman's nginx module for this:
+https://github.com/bashtoni/puppet-nginx/tree/conditionals
+
 License
 -------
 

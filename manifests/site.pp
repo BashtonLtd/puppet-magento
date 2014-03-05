@@ -10,9 +10,9 @@ define magento::site (
     try_files         => '$uri $uri/ /index.php?$args',
     index_files       => ['index.html', 'index.php',],
     server_name       => $server_name,
-    vhost_cfg_prepend => {
-      'if'              => '($http_x_forwarded_proto = "https") { set $elb_https on; }'
-    }
+    conditions        => [
+      'if ($http_x_forwarded_proto = "https") { set $elb_https on; }'
+    ],
   }
 
   nginx::resource::location { "${name}-php":
@@ -22,7 +22,7 @@ define magento::site (
     fastcgi             => '127.0.0.1:9000',
     try_files           => '$uri =404',
     location_cfg_append => {
-      fastcgi_param     => 'HTTPS    $elb_https;'
+      fastcgi_param     => 'HTTPS    $elb_https'
     }
   }
 
