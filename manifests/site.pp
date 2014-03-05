@@ -7,7 +7,7 @@ define magento::site (
 
   nginx::resource::vhost { $name:
     www_root          => $webroot,
-    try_files         => '$uri $uri/ /index.php?$args',
+    try_files         => ['$uri', '$uri/', '/index.php?$args'],
     index_files       => ['index.html', 'index.php',],
     server_name       => $server_name,
     conditions        => [
