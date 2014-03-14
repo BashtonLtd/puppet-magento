@@ -25,8 +25,9 @@ class magento::dependencies ($addepel = false) {
         "${phpprefix}-pdo",
         "${phpprefix}-gd",
         "${phpprefix}-soap",
+        "${phpprefix}-mbstring",
         "${phpprefix}-mcrypt",
-        "${phpprefix}-xml"
+        "${phpprefix}-xml",
       ]
     }
     default: {
