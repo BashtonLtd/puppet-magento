@@ -44,6 +44,7 @@ class magento::dependencies ($addepel = false) {
     service => $service,
     config  => $config,
   }
+  contain 'phpfpm'
 
   # Notify phpfpm after any package installation
   ensure_packages[$packages]
