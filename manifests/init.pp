@@ -25,7 +25,6 @@
 #
 class magento ($addepel = false, $php54 = false) {
 
-  class { 'magento::dependencies':
-  }
+  contain magento::dependencies
 
 }
