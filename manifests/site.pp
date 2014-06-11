@@ -2,15 +2,17 @@
 
 define magento::site (
   $webroot,
-  $server_name = [$name]
+  $server_name = [$name],
+  $include_files = []
 ) {
 
   nginx::resource::vhost { $name:
-    www_root          => $webroot,
-    try_files         => ['$uri', '$uri/', '/index.php?$args'],
-    index_files       => ['index.html', 'index.php',],
-    server_name       => $server_name,
-    conditions        => [
+    www_root      => $webroot,
+    try_files     => ['$uri', '$uri/', '/index.php?$args'],
+    index_files   => ['index.html', 'index.php',],
+    server_name   => $server_name,
+    include_files => $include_files,
+    conditions    => [
       'if ($http_x_forwarded_proto = "https") { set $elb_https on; }'
     ],
   }
