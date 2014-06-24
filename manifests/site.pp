@@ -3,7 +3,8 @@
 define magento::site (
   $webroot,
   $server_name = [$name],
-  $include_files = []
+  $include_files = [],
+  $cgi_timeout = '1m'
 ) {
 
   nginx::resource::vhost { $name:
@@ -18,13 +19,16 @@ define magento::site (
   }
 
   nginx::resource::location { "${name}-php":
-    vhost               => $name,
-    www_root            => $webroot,
-    location            => '~ \.php$',
-    fastcgi             => '127.0.0.1:9000',
-    try_files           => ['$uri', '=404',],
-    location_cfg_append => {
-      fastcgi_param     => 'HTTPS    $elb_https'
+    vhost                     => $name,
+    www_root                  => $webroot,
+    location                  => '~ \.php$',
+    fastcgi                   => '127.0.0.1:9000',
+    try_files                 => ['$uri', '=404',],
+    location_cfg_append       => {
+      fastcgi_param           => 'HTTPS    $elb_https',
+      fastcgi_connect_timeout => $cgi_timeout,
+      fastcgi_read_timeout    => $cgi_timeout,
+      fastcgi_send_timeout    => $cgi_timeout,
     }
   }
 
