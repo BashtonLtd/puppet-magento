@@ -32,24 +32,25 @@ define magento::site (
     }
   }
 
-  $denied = [
-    '^~ /app/',
-    '^~ /includes/',
-    '^~ /lib/',
-    '^~ /media/downloadable/',
-    '^~ /pkginfo/',
-    '^~ /report/config.xml',
-    '^~ /var/'
-  ]
-
-  nginx::resource::location { $denied:
+  $denied = {
+    "${name} app"          => { location => '^~ /app/' },
+    "${name} includes"     => { location => '^~ /includes/' },
+    "${name} lib"          => { location => '^~ /lib/' },
+    "${name} downloadable" => { location => '^~ /media/downloadable/' },
+    "${name} pkginfo"      => { location => '^~ /pkginfo/' },
+    "${name} report"       => { location => '^~ /report/config.xml' },
+    "${name} var"          => { location => '^~ /var/' }
+  }
+  $denied_properties = {
     www_root      => $webroot,
     vhost         => $name,
     location_deny => [ 'all' ],
   }
 
+  create_resources(nginx::resource::location, $denied, $denied_properties)
+
   # Don't serve htaccess etc to users
-  nginx::resource::location { 'dotfiles':
+  nginx::resource::location { "${name} dotfiles":
     www_root            => $webroot,
     vhost               => $name,
     location            => '/.',
