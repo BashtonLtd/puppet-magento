@@ -4,7 +4,8 @@ define magento::site (
   $webroot,
   $server_name = [$name],
   $include_files = [],
-  $cgi_timeout = '1m'
+  $cgi_timeout = '1m',
+  $cgi_buffering = 'on',
 ) {
 
   nginx::resource::vhost { $name:
@@ -29,6 +30,7 @@ define magento::site (
       fastcgi_connect_timeout => $cgi_timeout,
       fastcgi_read_timeout    => $cgi_timeout,
       fastcgi_send_timeout    => $cgi_timeout,
+      fastcgi_buffering       => $cgi_buffering,
     }
   }
 
