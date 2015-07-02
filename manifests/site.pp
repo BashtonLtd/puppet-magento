@@ -6,7 +6,7 @@ define magento::site (
   $include_files = [],
   $cgi_timeout = '1m',
   $cgi_buffering = 'on',
-  $cgi_buffers = '8 8k',
+  $cgi_buffers = '8 4k',
 ) {
 
   nginx::resource::vhost { $name:
