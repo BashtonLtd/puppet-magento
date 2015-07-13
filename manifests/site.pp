@@ -43,7 +43,8 @@ define magento::site (
     "${name} downloadable" => { location => '^~ /media/downloadable/' },
     "${name} pkginfo"      => { location => '^~ /pkginfo/' },
     "${name} report"       => { location => '^~ /report/config.xml' },
-    "${name} var"          => { location => '^~ /var/' }
+    "${name} var"          => { location => '^~ /var/' },
+    "${name} downloader"   => { location => '^~ /downloader/' }
   }
   $denied_properties = {
     www_root      => $webroot,
