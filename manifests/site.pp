@@ -21,12 +21,12 @@ define magento::site (
   }
 
   nginx::resource::location { "${name}-php":
-    vhost                     => $name,
-    www_root                  => $webroot,
-    location                  => '~ \.php$',
-    fastcgi                   => '127.0.0.1:9000',
-    try_files                 => ['$uri', '=404',],
-    location_cfg_append       => {
+    vhost               => $name,
+    www_root            => $webroot,
+    location            => '~ \.php$',
+    fastcgi             => '127.0.0.1:9000',
+    try_files           => ['$uri', '=404',],
+    location_cfg_append => {
       fastcgi_param           => 'HTTPS    $elb_https',
       fastcgi_connect_timeout => $cgi_timeout,
       fastcgi_read_timeout    => $cgi_timeout,

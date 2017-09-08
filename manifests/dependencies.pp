@@ -4,7 +4,7 @@ class magento::dependencies ($addepel = false) {
   case $::osfamily{
     'RedHat': {
       if ($::magento::addepel) {
-        include epel
+        include ::epel
       }
       if ($::magento::php54) {
         # Using SCL
@@ -35,18 +35,20 @@ class magento::dependencies ($addepel = false) {
     }
   }
 
-  class { 'nginx':
+  class { '::nginx':
     server_tokens => 'off',
   }
-  class { 'phpfpm':
+
+  class { '::phpfpm':
     user    => 'nginx',
     package => $package,
     service => $service,
     config  => $config,
   }
-  contain 'phpfpm'
+
+  contain ::phpfpm
 
   # Notify phpfpm after any package installation
-  ensure_packages[$packages]
+  ensure_packages($packages)
   Package[$packages] ~> Class['phpfpm']
 }

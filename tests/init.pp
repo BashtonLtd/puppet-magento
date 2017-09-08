@@ -9,8 +9,10 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include magento
+node default {
+  include ::magento
 
-magento::site { 'test':
-  webroot => '/var/www/test',
+  ::magento::site { 'test':
+    webroot => '/var/www/test',
+  }
 }
