@@ -2,14 +2,14 @@
 
 define magento::site (
   $webroot,
-  $server_name = [$name],
+  $server_name   = [$name],
   $include_files = [],
-  $cgi_timeout = '1m',
+  $cgi_timeout   = '1m',
   $cgi_buffering = 'on',
-  $cgi_buffers = '8 4k',
+  $cgi_buffers   = '8 4k',
 ) {
 
-  nginx::resource::vhost { $name:
+  ::nginx::resource::vhost { $name:
     www_root      => $webroot,
     try_files     => ['$uri', '$uri/', '/index.php?$args'],
     index_files   => ['index.html', 'index.php',],
@@ -20,7 +20,7 @@ define magento::site (
     ],
   }
 
-  nginx::resource::location { "${name}-php":
+  ::nginx::resource::location { "${name}-php":
     vhost               => $name,
     www_root            => $webroot,
     location            => '~ \.php$',
@@ -46,13 +46,14 @@ define magento::site (
     "${name} var"          => { location => '^~ /var/' },
     "${name} downloader"   => { location => '^~ /downloader/' }
   }
+
   $denied_properties = {
     www_root      => $webroot,
     vhost         => $name,
     location_deny => [ 'all' ],
   }
 
-  create_resources(nginx::resource::location, $denied, $denied_properties)
+  create_resources('::nginx::resource::location', $denied, $denied_properties)
 
   # Don't serve htaccess etc to users
   nginx::resource::location { "${name} dotfiles":
